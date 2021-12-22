@@ -1,0 +1,47 @@
+extends layout 
+block content
+  style.
+    body {
+      font-family: Verdana;
+    }
+  script(src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js")
+  script.
+      function addDarkmodeWidget() { 
+      const options = {
+          bottom: '32px', // default: '32px'
+          right: '32px', // default: '32px'
+          left: 'unset', // default: 'unset'
+          time: '0.3s', // default: '0.3s'
+          mixColor: '#ff5c5c', // default: '#fff'
+          backgroundColor: 'linear-gradient(to bottom right,#ff5c5c,#fc6d6d, white);',  // default: '#fff'
+          buttonColorDark: '#100f2c',  // default: '#100f2c'
+          buttonColorLight: '#fff', // default: '#fff'
+          saveInCookies: true, // default: true,
+          label: '🌓', // default: ''
+          autoMatchOsTheme: true // default: true
+      }
+
+      const darkmode = new Darkmode(options);
+      darkmode.showWidget();
+
+      }
+      window.addEventListener('load', addDarkmodeWidget);
+  div(class = "float-container", style="width:100%;")
+    div(class = "float-child")
+            h1(style="float: left") Selected Songs 
+                div(style = "overflow: auto; height:500px;width:700px;border:1px solid #ccc; font:16px/26px Serif;")
+                  if(songNames)
+                    each val, index in songNames
+                        p #{val}, #{artistNames[index]}
+                if(songNames)
+                  p(style = "font-weight: 300") Number of songs: #{songNames.length}
+                if(directory)
+                  button(class="rounded-button",onclick = "window.location.href='/recommendations/" + directory.replace(/\\/g, '%5C') + "'") Return
+                else
+                  button(class="rounded-button",onclick = "window.location.href='/recommendations'") Return
+    div(class = "float-child")
+            h1(style="float: left") Recommendations
+                div(style = "overflow: auto; height:500px;width:700px;border:1px solid #ccc; font:16px/26px Serif;")
+                  each val in recommendations 
+                      p #{val}
+                p(style = "font-weight: 300") Number of Artists: #{recommendations.length - 1}

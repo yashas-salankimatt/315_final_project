@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <button class="rounded-button" onclick="window.location.href='/'">Home</button>
+    <button class="rounded-button" onclick="window.location.href='/upload'">Upload Files</button>
+    <button class="rounded-button" onclick="window.location.href='/edit'">Edit Tracks</button>
+    <button class="rounded-button" onclick="window.location.href='/tabs'">Sheet Music</button>
+    <button class="rounded-button" onclick="window.location.href='/recommendations'">Recommendations</button>
+  </head>
+  <body>
+    <style>
+      body {
+      font-family: Verdana;
+      background: #FF5C5C;
+      }
+    </style>
+    <div class="float-container" style="width:100%;">
+      <div class="float-child">
+        <h1 style="float: left">
+          <div class="slidecontainer">
+            <p style="font-weight: 300">Song End Time </p>
+            <input class="edit-slider slider" type="range" min="1" max="1000" value="1000" name="songEnd">
+            <p style="font-weight: 300">End Time: xx:xx</p>
+            <p style="font-weight: 300">Song Start Time </p>
+            <input class="edit-slider slider" type="range" min="1" max="1000" value="1" name="songStart">
+            <p style="font-weight: 300">Start Time: xx:xx</p>
+            <p style="font-weight: 300">Song Speed </p>
+            <input class="edit-slider slider" type="range" min="25" max="175" value="100" name="songSpeed">
+            <p style="font-weight: 300" name="speedText">Speed: xx%</p>
+            <button class="rounded-button">Sample Song</button>
+            <button class="rounded-button">Submit Changes</button>
+          </div>
+        </h1>
+      </div>
+      <div class="float-child">
+        <h1 style="float: left">Edit a Song
+          <p style="font-weight: 300">
+             Use the sliders on the left to adjust the length and speed of a song. Click sample song to sample the changes and submit changes to confirm. Click return to return to the song select page.<br>
+            <button class="rounded-button" onclick="window.location.href = '/edit'">Return</button>
+          </p>
+        </h1>
+      </div>
+    </div>
+  </body>
+</html>

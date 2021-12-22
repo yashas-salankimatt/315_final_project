@@ -1,0 +1,30 @@
+extends layout 
+block content
+  style.
+    body {
+      font-family: Verdana;
+      background: url("/images/indexBackground.jpg");
+      background-size: cover;
+    }
+    
+    h1 {
+      color: white;
+    }
+
+    p{
+      color: white;
+    }
+
+  center
+    h1 Welcome to #{title}!
+      div
+        img(src='/images/logo.png', class = "centerImage", style='width:500px; height:500px; padding-right: 50px;')
+        br
+        p(class = "modern-paragraph", style = "color:white; font-size:30px;") Here at Musworks, we are dedicated to assisting up and coming DJ's in creating their tracks. 
+        br
+        p(class = "modern-paragraph", style = "color:white; font-size:30px;") To begin with this process, all you have to do is click the button below to upload some audio files.
+      br
+      if(directory)
+        button(class = "rounded-button", onclick = "window.location.href='/upload/" + directory.replace(/\\/g, '%5C') + "'") Upload Files
+      else
+        button(class = "rounded-button", style = "height: 100px; width:400px; font-size: 50px; background-color: #FF5C5C; " onclick = "window.location.href='/upload'") Get Started

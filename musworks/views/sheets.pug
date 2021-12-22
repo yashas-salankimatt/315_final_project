@@ -1,0 +1,47 @@
+extends layout 
+block content
+  style.
+    body {
+      font-family: Verdana;
+    }
+
+  script(src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js")
+  script.
+      function addDarkmodeWidget() { 
+      const options = {
+          bottom: '64px', // default: '32px'
+          right: '32px', // default: '32px'
+          left: 'unset', // default: 'unset'
+          time: '0.3s', // default: '0.3s'
+          mixColor: '#ff5c5c', // default: '#fff'
+          backgroundColor: 'linear-gradient(to bottom right,#ff5c5c,#fc6d6d, white);',  // default: '#fff'
+          buttonColorDark: '#100f2c',  // default: '#100f2c'
+          buttonColorLight: '#fff', // default: '#fff'
+          saveInCookies: true, // default: true,
+          label: '🌓', // default: ''
+          autoMatchOsTheme: true // default: true
+      }
+
+      const darkmode = new Darkmode(options);
+      darkmode.showWidget();
+
+      }
+      window.addEventListener('load', addDarkmodeWidget);
+  h1 
+  if(displayName)
+    p(style = "font-size:2em; font-weight:bolder;") #{displayName}
+  else
+    p(style = "font-size:2em; font-weight:bolder;") Song Name, Artist
+  if(directory)
+    button(class = "rounded-button", onclick = "window.location.href='/tabs/" + directory.replace(/\\/g, '%5C') + "'") Return
+  div(class = "float-container", style="width:100%;")
+    div(class = "float-child")
+            h1(style="float: left") Lyrics
+                div(style = "overflow: auto; height:500px;width:700px;border:1px solid #ccc; font:16px/26px Serif;")
+                  each val in lyrics
+                    p #{val}
+                a(class = "rounded-button", href = 'data:text/plain;charset=utf-8,' + encodeURIComponent(lyrics), download = "lyrics.txt") Download
+    div(class = "float-child")
+            h1(style ="float: left") Sheet Music
+                br
+                button(class = "rounded-button", onclick = "window.open('" + sheetMusic + "','_blank')") Access Sheet Music

@@ -1,0 +1,70 @@
+extends layout 
+block content
+    script(src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js")
+    script.
+        function addDarkmodeWidget() { 
+        const options = {
+            bottom: '64px', // default: '32px'
+            right: '32px', // default: '32px'
+            left: 'unset', // default: 'unset'
+            time: '0.3s', // default: '0.3s'
+            mixColor: '#ff5c5c', // default: '#fff'
+            backgroundColor: 'linear-gradient(to bottom right,#ff5c5c,#fc6d6d, white);',  // default: '#fff'
+            buttonColorDark: '#100f2c',  // default: '#100f2c'
+            buttonColorLight: '#fff', // default: '#fff'
+            saveInCookies: true, // default: true,
+            label: '🌓', // default: ''
+            autoMatchOsTheme: true // default: true
+        }
+
+        const darkmode = new Darkmode(options);
+        darkmode.showWidget();
+
+        }
+        window.addEventListener('load', addDarkmodeWidget);
+        
+    script(type="text/javascript") function getfolder(e) { var files = e.target.files; var path = files[0].webkitRelativePath; var Folder = path.split("/"); alert(URL.createObjectURL(e.target.files[0]));}
+    style.
+        body {
+            font-family: Verdana;
+        }
+    div(class = "float-container")
+        div(class = "float-child")
+            div
+                h1(style="float: left;") List of Loaded Songs
+                    div(style = "overflow: auto; height:500px;width:auto;border:1px solid #ccc; font:16px/26px Serif;") 
+                            if(songNames)
+                                if(artistNames)
+                                    each val, index in songNames
+                                        p #{val}, #{artistNames[index]}
+                                            if(directory)
+                                                button(class = "rounded-button-list", style = "float: right", onclick="window.location.href='/upload/" + directory.replace(/\\/g, '%5C') + '/' + val + "'") Remove
+                                                button(class = "rounded-button-list", style = "float: right", onclick = "window.location.href='/edit/ " + directory.replace(/\\/g, '%5C') + '/' + val + "," + artistNames[index] + "'") Edit    
+                    div(class = "float-container")
+                        if(songNames)
+                            div(class = "float-child", style = "font-weight: 300; color: #f2f2f2;") Number of songs: #{songNames.length}
+                        else 
+                            div(class = "float-child", style = "font-weight: 300; color: #f2f2f2;") Number of songs: 0
+                        if(trackLength)
+                            div(class = "float-child", style = "font-weight: 300; color: #f2f2f2;") Total Track Length: #{trackLength}
+                        else 
+                            div(class = "float-child", style = "font-weight: 300; color: #f2f2f2;") Total Track Length: xx:xx
+        div(class = "float-child")
+            div
+                h1(style ="float: left;width: auto") Upload Files
+                    p(style = "font-weight: 300; width: auto")
+                        | To get started, fill in the text boxes below with the paths to where your files are stored. The menu on the left will allow you to remove songs and show the total length of the track and each individual song. Please name the files using the format "songName-Artist".
+                        br
+                        form(method = "POST", action = "/upload/getPath")
+                            div 
+                                label(for="source_path", style="font:32px/52px Serif; width: auto;") Source File
+                                br
+                                input(type="text", name="source_path", id="source_path", label="Source File", required)
+                            div
+                                label(for="path_name", style = "font:32px/52px Serif; width: auto") Destination File
+                                br
+                                input(type="text", name="path", id="path_name", label="Destination File", required)
+                            div 
+                                input(class = "rounded-button", type = "submit", name = "btn_upload_music", value = "Upload")
+                            if(status)
+                                div(style = "font:16px/26px Serif;") #{status}

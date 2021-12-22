@@ -1,0 +1,23 @@
+doctype html
+html
+  head
+    title= title
+    script(src="https://code.jquery.com/jquery-3.5.1.slim.min.js", integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj", crossorigin="anonymous")
+    script(src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js", integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV", crossorigin="anonymous")
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    if(directory)
+      div(class = "topnav")
+        a(href = '/route/' + directory) Home
+        a(href = '/upload/' + directory) Upload Files
+        a(href = '/edit/' + directory) Edit Tracks
+        a(href = '/tabs/' + directory) Sheet Music
+        a(href = '/recommendations/' + directory) Recommendations
+    else
+      div(class = "topnav")
+        a(href = '/') Home
+        a(href = '/upload/') Upload Files
+        a(href = '/edit/') Edit Tracks
+        a(href = '/tabs/') Sheet Music
+        a(href = '/recommendations/') Recommendations
+  body
+    block content

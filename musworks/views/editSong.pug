@@ -1,0 +1,50 @@
+extends layout 
+block content
+    style.
+        body {
+        font-family: Verdana;
+        }
+    script(src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js")
+    script.
+        function addDarkmodeWidget() { 
+        const options = {
+            bottom: '64px', // default: '32px'
+            right: '32px', // default: '32px'
+            left: 'unset', // default: 'unset'
+            time: '0.3s', // default: '0.3s'
+            mixColor: '#ff5c5c', // default: '#fff'
+            backgroundColor: 'linear-gradient(to bottom right,#ff5c5c,#fc6d6d, white);',  // default: '#fff'
+            buttonColorDark: '#100f2c',  // default: '#100f2c'
+            buttonColorLight: '#fff', // default: '#fff'
+            saveInCookies: true, // default: true,
+            label: '🌓', // default: ''
+            autoMatchOsTheme: true // default: true
+        }
+
+        const darkmode = new Darkmode(options);
+        darkmode.showWidget();
+
+        }
+        window.addEventListener('load', addDarkmodeWidget);
+    div(class = "float-container", style="width:100%;")
+        div(class = "float-child")
+                h1(style ="float: left") #{songName}
+                    div(class = "slidecontainer")
+                        form(method="POST", action="/edit/" + directory.replace(/\\/g, '%5C').replace(/ /g, '') + "/" + songName + "/submit")
+                            p(style = "font-weight: 300") Song End Time 
+                            input(class = "edit-slider", type = "range", min = "1", max = trackLength, value = trackLength, class = "slider", name ="songEnd", id="endSlider")
+                            p(style = "font-weight: 300", id ="endTime") End Time: 
+                            script(type="text/javascript") var slider1 = document.getElementById("endSlider"); var output1 = document.getElementById("endTime"); output1.innerHTML = "End Time: " + slider1.value + "s"; slider1.oninput = function(){output1.innerHTML = "End Time: " + this.value + "s";}
+                            p(style = "font-weight: 300") Song Start Time 
+                            input(class = "edit-slider", type = "range", min = "0", max = trackLength, value = "0", class = "slider", name ="songStart", id="startSlider")
+                            p(style = "font-weight: 300", id="startTime") Start Time: 0
+                            script(type="text/javascript") var slider2 = document.getElementById("startSlider"); var output2 = document.getElementById("startTime"); output2.innerHTML = "Start Time: " + slider2.value + "s"; slider2.oninput = function(){output2.innerHTML = "Start Time: " + this.value + "s";}
+                            p(style = "font-weight: 300") Song Speed 
+                            input(class = "rounded-button", type="submit", value = "Submit Changes")
+        div(class = "float-child")
+                h1(style ="float: left") Edit a Song
+                    p(style = "font-weight: 300") 
+                        | Use the sliders on the left to adjust the length.Click submit changes to confirm. Click return to return to the song select page.
+                        br
+                        if(directory)
+                            button(class = "rounded-button", onclick = "window.location.href = '/edit/" + directory.replace(/\\/g, '%5C').replace(/ /g, '') + "'") Return

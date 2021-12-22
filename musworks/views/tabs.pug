@@ -1,0 +1,58 @@
+extends layout 
+block content
+  style.
+    body {
+      font-family: Verdana;
+    }
+    a{
+      color: white;
+      font-size: 30px;
+    }
+
+    .header_image{
+      top: 10px;
+      position: relative;
+    }
+
+    .header_image img{
+      margin: none;
+      padding: none;
+      width: 
+    }
+
+  script(src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js")
+  script.
+    function addDarkmodeWidget() { 
+      const options = {
+        bottom: '64px', // default: '32px'
+        right: '32px', // default: '32px'
+        left: 'unset', // default: 'unset'
+        time: '0.3s', // default: '0.3s'
+        mixColor: '#ff5c5c', // default: '#fff'
+        backgroundColor: 'linear-gradient(to bottom right,#ff5c5c,#fc6d6d, white);',  // default: '#fff'
+        buttonColorDark: '#100f2c',  // default: '#100f2c'
+        buttonColorLight: '#fff', // default: '#fff'
+        saveInCookies: true, // default: true,
+        label: '🌓', // default: ''
+        autoMatchOsTheme: true // default: true
+      }
+
+      const darkmode = new Darkmode(options);
+      darkmode.showWidget();
+
+    }
+    
+    
+    window.addEventListener('load', addDarkmodeWidget);
+ 
+  section(id = "container")
+    div(class = "float_center")
+      h1(class ="child") Select the Sheet Music to View
+        ul(multiple, style = "overflow: auto; height:500px;width:700px;border:1px solid #ccc; font:16px/26px Serif;")
+          if(directory)
+            if(songNames)
+              if(artistNames)
+                each val, index in songNames
+                  a(href = '/tabs/' + directory + '/' + val + '/' + artistNames[index]) #{val}, #{artistNames[index]} <br/>
+
+    //-div(class = "float-child", style = "font-weight: 300") Number of songs: #{songNames.length}

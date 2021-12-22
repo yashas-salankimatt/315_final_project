@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <button class="rounded-button" onclick="window.location.href='/'">Home</button>
+    <button class="rounded-button" onclick="window.location.href='/upload'">Upload Files</button>
+    <button class="rounded-button" onclick="window.location.href='/edit'">Edit Tracks</button>
+    <button class="rounded-button" onclick="window.location.href='/tabs'">Sheet Music</button>
+    <button class="rounded-button" onclick="window.location.href='/recommendations'">Recommendations</button>
+  </head>
+  <body>
+    <style>
+      body {
+        font-family: Verdana;
+        background: #FF5C5C;
+      }
+    </style>
+    <h1> </h1>
+    <p style="font-size:2em; font-weight:bolder;">Song Name, Artist</p>
+    <button class="rounded-button" onclick="window.location.href='/tabs'">Return</button>
+    <div class="float-container" style="width:100%;">
+      <div class="float-child">
+        <h1 style="float: left">Lyrics
+          <div style="overflow: auto; height:500px;width:700px;border:1px solid #ccc; font:16px/26px Serif;"></div>
+          <button class="rounded-button">Download</button>
+        </h1>
+      </div>
+      <div class="float-child">
+        <h1 style="float: left">Sheet Music<br>
+          <button class="rounded-button" onclick="window.open('undefined','_blank')">Access Sheet Music</button><br>
+          <button class="rounded-button">Download</button>
+        </h1>
+      </div>
+    </div>
+  </body>
+</html>

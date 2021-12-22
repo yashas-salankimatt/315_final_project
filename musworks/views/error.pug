@@ -1,0 +1,11 @@
+extends layout
+
+block content
+  style.
+    body {
+      font-family: Verdana;
+      background: #FF5C5C;
+    }
+  h1= message
+  h2= error.status
+  pre #{error.stack}

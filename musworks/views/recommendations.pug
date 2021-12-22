@@ -1,0 +1,60 @@
+extends layout 
+block content
+    style.
+        body {
+            font-family: Verdana; 
+        }
+    script(src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js")
+    script.
+        function addDarkmodeWidget() { 
+        const options = {
+            bottom: '64px', // default: '32px'
+            right: '32px', // default: '32px'
+            left: 'unset', // default: 'unset'
+            time: '0.3s', // default: '0.3s'
+            mixColor: '#ff5c5c', // default: '#fff'
+            backgroundColor: 'linear-gradient(to bottom right,#ff5c5c,#fc6d6d, white);',  // default: '#fff'
+            buttonColorDark: '#100f2c',  // default: '#100f2c'
+            buttonColorLight: '#fff', // default: '#fff'
+            saveInCookies: true, // default: true,
+            label: '🌓', // default: ''
+            autoMatchOsTheme: true // default: true
+        }
+
+        const darkmode = new Darkmode(options);
+        darkmode.showWidget();
+
+        }
+        window.addEventListener('load', addDarkmodeWidget);
+        
+    div(class = "float-container")
+        div(class = "float-child")
+                h1(style="float: left; width:auto") Select Songs to Get Recommendations
+                        if(songNames)
+                            if(artistNames)
+                                if(directory)
+                                    form(action="/recommendations/" + directory.replace(/\\/g, '%5C') + "/list")
+                                        input(type="text", class="searchTerm", name="name", placeholder="Search Artists")
+                                        div(style = "overflow: auto; height:auto;width:auto;border:1px solid #ccc; font:16px/26px Serif;")
+                                            each val, index in songNames
+                                                p #{val}, #{artistNames[index]}
+                                                    input(type = "checkbox", name = "checked" + index, style = "float: right")
+                                        div(class = "float-container")
+                                            if(songNames)
+                                                div(class = "float-child", style = "font-weight: 300; color: #f2f2f2;") Number of songs: #{songNames.length}
+                                            else 
+                                                div(class = "float-child", style = "font-weight: 300; color: #f2f2f2;") Number of songs: 0
+                                            if(trackLength)
+                                                div(class = "float-child", style = "font-weight: 300; color: #f2f2f2;") Total Track Length: #{trackLength}
+                                            else 
+                                                div(class = "float-child", style = "font-weight: 300; color: #f2f2f2;") Total Track Length: xx:xx
+                                        input(class = "rounded-button", type = "submit", name = "submit", value = "Get Recommendations")
+                        else 
+                            form(action="/recommendations/noDirectory/artists")
+                                input(type="text", class="searchTerm", name="name", placeholder="Search Artists")
+                                div(style = "overflow: auto; height:auto;width:auto;border:1px solid #ccc; font:16px/26px Serif;")
+                                input(class = "rounded-button", type = "submit", name = "submit", value = "Get Recommendations")
+        div(class = "float-child")
+                h1(style ="float: left; width: auto") Get Recommendations
+                    p(style = "font-weight: 300; width: auto") 
+                        | Select the songs which will be used to find similar artists for recommendations. The search bar can be used to find a single artist if they aren't in your listed in your files. Use the boxes below the select menu to decide what to find recommendations on.
